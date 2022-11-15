@@ -13,7 +13,6 @@ from matplotlib.figure import Figure
 class App:
     def __init__(self, root):
         # setting title
-        # new comment
         root.title("undefined")
         # setting window size
         width = 600
