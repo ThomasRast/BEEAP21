@@ -9,9 +9,11 @@ import tkinter.font as tkFont
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 
+
 class App:
     def __init__(self, root):
         # setting title
+        # new comment
         root.title("undefined")
         # setting window size
         width = 600
@@ -63,22 +65,26 @@ class App:
         try:
             self.__df = pd.read_csv(filePath)
             self.__df = self.__df.dropna()
-            self.__GListBox_563['values'] = list(self.__df['COMMUNITY AREA NAME'].unique())
+            self.__GListBox_563['values'] = list(
+                self.__df['COMMUNITY AREA NAME'].unique())
         except:
             # quick and dirty, desired behavior would be to show a notification pop up that says
             # "nope!"
             print('nope')
 
-    # desired behavior: select one area, show 4 plots drawn on 4 canvases of that area: 
+    # desired behavior: select one area, show 4 plots drawn on 4 canvases of that area:
     # top left: bar chart, average KWH by month
     # top right: bar chart, average THERM by month
     # bottom left and bottom right up to you
     def __comboBoxCb(self, event=None):
-        self.__subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME'] == self.__GListBox_563.get()]
+        self.__subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME']
+                                     == self.__GListBox_563.get()]
         print(self.__subdf.head())
-        fig1 = Figure(figsize=(self.__GLineEdit_392.winfo_width, self.__GLineEdit_392.winfo_height), dpi=100)
+        fig1 = Figure(figsize=(self.__GLineEdit_392.winfo_width,
+                      self.__GLineEdit_392.winfo_height), dpi=100)
         ax1 = fig1.add_subplot(111)
-        self.__subdf.iloc[:, range(self.__subdf.columns.get_loc['KWH JANUARY 2010'], 12)].mean().plot.bar(ax=ax1)
+        self.__subdf.iloc[:, range(
+            self.__subdf.columns.get_loc['KWH JANUARY 2010'], 12)].mean().plot.bar(ax=ax1)
 
 
 if __name__ == "__main__":
